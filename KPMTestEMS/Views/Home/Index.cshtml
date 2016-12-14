@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>KPM - Production Managment System</h1>
+    <p class="lead">This platform allows visitors to review the assortments produced by KPM, and on regisered users to place their orders.</p>
+    <p>
+        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-primary btn-lg" })
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Company description</h2>
+        <p>
+            The Company is established 1902 ....
+        </p>
+        <p><a class="btn btn-default" href="#">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Industry standartds</h2>
+        <p>
+            Other information about similar manifacturing
+        </p>
+        <p><a class="btn btn-default" href="#">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>News</h2>
+        <p>News and events</p>
+        <p><a class="btn btn-default" href="#">Learn more &raquo;</a></p>
+    </div>
+</div>
