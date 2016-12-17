@@ -1,0 +1,103 @@
+﻿@model KPMTestEMS.Models.OrderViewModel
+
+@{
+    ViewBag.Title = "Order";
+}
+<script type="text/javascript" src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+@*<script type="text/javascript" src="~/Scripts/DatePickerReady.js"></script>*@
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker").datepicker(
+            {
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                showOn: "both"
+            }
+        );
+
+    });
+</script>
+<style type="text/css">
+    .ui-datepicker{font-size:8pt !important}
+</style>
+
+<form class="form-horizontal">
+    <fieldset>
+        <div class="container col-lg-10 col-md-10 col-sm-12 col-xs-12">
+            <div class="page-header">
+                <h2>Create order</h2>
+            </div>
+            <p>Choose properties and width</p>
+
+            <div class="well">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Select brand</label>
+                    <div class="col-sm-4">
+                        @foreach (var brand in Model.Brand)
+                        {
+                            <input type="radio" name="optionsRadios" id="@("optionsRadios" + brand.ID)" value="@("option" + brand.ID)">
+                            @brand.PaperBrand
+                            <br />
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="select_weight" class="control-label col-sm-4" >Select weight</label>
+                    <div class="col-sm-4">
+                        <select class="form-control col-xs-4 col-sm-4" id="select_weight">
+                            @foreach (var weight in Model.Weight)
+                            {
+                                <option>@weight.PaperWeight</option>
+                            }
+                        </select>
+                    </div>
+                    @*<div class="col-sm-push-3">
+                            <p>Grams per square meter</p>
+                        </div>*@
+                </div>
+
+                <div class="form-group">
+                    <label for="select_width" class="control-label col-sm-4">Select width</label>
+                    <div class="col-sm-4">
+                        <select multiple="" class="form-control col-xs-4 col-sm-4" id="select_width">
+                            @foreach (var width in Model.Width)
+                            {
+                                <option>@width.PaperWidth</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.DueDate, new { @class = "control-label col-sm-4", @for = "datepicker" })
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.DueDate, "{0:dd-MM-yyyy}", new { @class = "form-control col-xs-4 col-sm-4 datepicker", @id = "datepicker" })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="textArea" class="control-label col-sm-4">Your comments</label>
+                    <div class="col-sm-4">
+                        <textarea class="form-control col-xs-4 col-sm-4" rows="3" id="textArea"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using KPMTestEMS.Models;
+using System.Diagnostics;
 
 namespace KPMTestEMS.Controllers
 {
@@ -151,7 +152,16 @@ namespace KPMTestEMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FullName = model.FullName,
+                    Company = model.Company,
+                    Position = model.Position,
+                    RegistrationDate = DateTime.Now
+                };
+
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
