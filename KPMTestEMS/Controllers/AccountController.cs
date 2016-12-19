@@ -80,6 +80,10 @@ namespace KPMTestEMS.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    if (returnUrl == null)
+                    {
+                        returnUrl = "/Manage/Index";
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

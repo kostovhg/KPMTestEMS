@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KPMTestEMS.Models;
+using KPMTestEMS.Models.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +18,8 @@ namespace KPMTestEMS
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            TestDbContext context = new TestDbContext();
+            SeedHelper.SeedDatabase(context);
         }
     }
 }

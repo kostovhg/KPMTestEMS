@@ -16,6 +16,7 @@ namespace KPMTestEMS
             // for migrating database to last version
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<TestDbContext, Configuration>());
             ConfigureAuth(app);
+
         }
     }
 }

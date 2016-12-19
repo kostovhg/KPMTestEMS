@@ -3,16 +3,22 @@
 }
 
 <div class="jumbotron">
-    <h2>KPM - Orders Managment System</h2>
+    <h2>KPM - Orders managment system</h2>
     <p class="lead">To log in with default roles use password: 123 </p>
     <p class="lead">For different roles use : </p>
     <ul>
         <li>Admin: admin@kpm.bg</li>
         <li>Trader: trader@kpm.bg</li>
-        <li>Client: pesho@abv.bg</li>
+        <li>Client1: pesho@abv.bg</li>
+        <li>Client2: ivan@abv.bg</li>
     </ul>
     <p>
-        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-primary btn-lg" })
+        @if (!User.Identity.IsAuthenticated)
+        {
+            @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-primary btn-lg" })
+        }
+        @Html.ActionLink("View products", "ViewProducts", "Home", routeValues: null, htmlAttributes: new { @class = "btn btn-primary btn-lg" })
+
     </p>
 </div>
 

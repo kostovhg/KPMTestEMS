@@ -7,6 +7,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using KPMTestEMS.Models;
+using System.Web.Hosting;
+using static KPMTestEMS.Controllers.ManageController;
+using System.IO;
 
 namespace KPMTestEMS.Controllers
 {
@@ -61,6 +64,8 @@ namespace KPMTestEMS.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.PhotoUploadSuccess ? "Your photo has been uploaded."
+                : message == ManageMessageId.FileExtensionError ? "Only jpg, png and gif file formats are allowed."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -322,6 +327,66 @@ namespace KPMTestEMS.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+        #region Upload Photo
+        // Uploading photo to the user account
+
+        private async Task<ApplicationUser> GetCurrentUserAsync()
+        {
+            // User -> Get the user security information for the current Http request
+            // Identity -> Get the identity of the current principle
+            // GetuserId() -> Return the user id using UserIdClaimType
+            // FindByIdAsync => And find the user by id
+            return await UserManager.FindByIdAsync(User.Identity.GetUserId());
+        }
+
+        // HttpPostedFileBase file - choose a file to upload.
+        [HttpPost]
+        public async Task<ActionResult> UploadPhoto(HttpPostedFileBase file)
+        {
+            if (file != null && file.ContentLength > 0)
+            {
+                // get user and user name
+                var user = await GetCurrentUserAsync();
+                var username = user.UserName;
+
+                // Get file extension
+                var fileExt = Path.GetExtension(file.FileName);
+
+                // Assign the usrname as the name of the image file
+                var fnm = username + ".png";
+
+                // Declare the permited file extensions.
+                // Important for security if saving in the webroot
+                if (fileExt.ToLower().EndsWith(".png") || fileExt.ToLower().EndsWith(".jpg") || fileExt.ToLower().EndsWith(".gif"))
+                {
+                    // Declare the path of your file
+                    var filePath = HostingEnvironment.MapPath("~/Content/Images/Profile/") + fnm;
+
+                    // check if the directory that we are saving images exist, if not create it
+                    var directory = new DirectoryInfo(HostingEnvironment.MapPath("~/Content/Images/Profile/"));
+                    if (directory.Exists == false)
+                    {
+                        directory.Create();
+                    }
+
+
+                    ViewBag.FilePath = filePath.ToString();
+
+                    // Save the file and return to the view
+                    file.SaveAs(filePath);
+                    return RedirectToAction("Index", new { Message = ManageMessageId.PhotoUploadSuccess });
+                }
+                else
+                {
+                    return RedirectToAction("Index", new { Message = ManageMessageId.FileExtensionError });
+                }
+            }
+
+            return RedirectToAction("Index", new { Message = ManageMessageId.Error });
+        }
+        
+        #endregion
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -381,7 +446,9 @@ namespace KPMTestEMS.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
-            Error
+            Error,
+            PhotoUploadSuccess,
+            FileExtensionError
         }
 
 #endregion

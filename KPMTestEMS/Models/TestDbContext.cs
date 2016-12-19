@@ -32,5 +32,7 @@ namespace KPMTestEMS.Models
         {
             return new TestDbContext();
         }
+
+        //public System.Data.Entity.DbSet<KPMTestEMS.Models.Product> Products { get; set; }
     }
 }

@@ -14,5 +14,10 @@ namespace KPMTestEMS.Models.Production
         [Required]
         public string PaperBrand { get; set; }
 
+        [Required]
+        public string Description { get; set; }
+        [Required]
+        public string FullName { get; set; }
+
     }
 }

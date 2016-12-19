@@ -21,15 +21,15 @@ namespace KPMTestEMS.Models
 
         [Required]
         //[ForeignKey("Brand")]
-        public int BrandId { get; set; }
+        public int Brand { get; set; }
 
         [Required]
         //[ForeignKey("Weight")]
-        public int WeightId { get; set; }
+        public int Weight { get; set; }
 
         [Required]
         //[ForeignKey("Width")]
-        public int WidthId { get; set; }
+        public int Width { get; set; }
 
         [Required]
         public int Quantity { get; set; }
@@ -50,17 +50,17 @@ namespace KPMTestEMS.Models
 
         public ClientOrder(
             string clientId,
-            int brandId,
-            int weightId,
-            int widthId,
+            int brand,
+            int weight,
+            int width,
             DateTime dueDate,
             int quantity
             )
         {
             this.ClientId = clientId;
-            this.BrandId = brandId;
-            this.WeightId = weightId;
-            this.WidthId = widthId;
+            this.Brand = brand;
+            this.Weight = weight;
+            this.Width = width;
             this.DueDate = dueDate;
         }
     }

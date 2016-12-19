@@ -27,9 +27,9 @@
                         <td>@order.ID</td>
                         <td>@order.DueDate</td>
                         <td>
-                        @String.Format("Type: {0}, weight {1} gr, width: {2}", order.OrderedProductBrand,
-                                    order.OrderedProductWeight,
-                                    order.OrderedProductWidth)
+                        @String.Format("Type: {0}, weight {1} gr, width: {2}", order.BrandId,
+                                    order.WeightId,
+                                    order.WidthId)
                         </td>
                         <td>@order.Quantity</td>
                         <td>@order.Status</td>

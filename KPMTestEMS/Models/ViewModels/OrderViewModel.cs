@@ -20,7 +20,7 @@ namespace KPMTestEMS.Models
 
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString ="{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime DueDate { get; set;}
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DueDate { get; set; }
     }
 }

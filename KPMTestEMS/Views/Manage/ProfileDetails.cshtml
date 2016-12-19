@@ -1,7 +1,7 @@
 ﻿@model KPMTestEMS.Models.IndexViewModel
-    @using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity
 @{
-    ViewBag.Title = "Your profile page";
+    ViewBag.Title = "Manage";
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -18,31 +18,31 @@
                 var imgUrl = Url.Content("~/Content/Images/Profile/" + User.Identity.GetUserName() + ".png") + "?time=" + DateTime.Now.ToString();
                 <div class="upimage">
                     <div class="accimg">
-                        <img src="@imgUrl" height="250" width="250"/>
+                        <img src="@imgUrl" height="250" width="250" />
                     </div>
                 </div>
                 <div class="mngimg">
                     @using (Html.BeginForm("UploadPhoto", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
                         <input type="file" name="file" id="files" value="Browse" />
-                        <br/>
+                        <br />
                         <input type="submit" value="Upload" />
                     }
                 </div>
             }
         </dd>
 
-        <dt>Details:</dt>
+        <dt>Password:</dt>
         <dd>
             [
             @if (Model.HasPassword)
             {
-            @Html.ActionLink("Change your password", "ChangePassword")
+                @Html.ActionLink("Change your password", "ChangePassword")
             }
             else
             {
-            @Html.ActionLink("Create", "SetPassword")
-                }
+                @Html.ActionLink("Create", "SetPassword")
+            }
             ]
         </dd>
         <dt>External Logins:</dt>
@@ -52,13 +52,13 @@
         </dd>
         @*
             Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-             
+
              See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
                 for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-             
+
              Uncomment the following block after you have set up two-factor authentication
         *@
-        @*  
+        @*
             <dt>Phone Number:</dt>
             <dd>
                 @(Model.PhoneNumber ?? "None")
