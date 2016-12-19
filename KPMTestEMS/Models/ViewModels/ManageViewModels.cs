@@ -12,6 +12,8 @@ namespace KPMTestEMS.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        // Add FullName for user to be shown in profile manage views.
+        public string FullName { get; set; }
     }
 
     public class ManageLoginsViewModel
@@ -82,5 +84,11 @@ namespace KPMTestEMS.Models
     {
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+    }
+
+    public class ClientOptionsViewModel
+    {
+        public NewOrderViewModel newOrder { get; set; }
+        public IndexViewModel IndexVM { get; set; }
     }
 }

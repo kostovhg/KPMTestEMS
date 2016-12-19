@@ -9,12 +9,12 @@ using System.Web.Mvc;
 namespace KPMTestEMS.Controllers
 {
     [Authorize]
-    public class ClientOrderController : Controller
+    public class ClientOrderController : ApplicationBaseController
     {
         // GET: ClientsOrders
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("List");
         }
 
         // GET: ClientOrder/List
@@ -34,41 +34,11 @@ namespace KPMTestEMS.Controllers
             return View(clientOrders);
         }
 
-        private IEnumerable<SelectListItem> GetBrands()
-        {
-            var database = new TestDbContext();
-            var brands = database.Brand.Select(b => new SelectListItem
-            {
-                Value = b.ID.ToString(),
-                Text = b.PaperBrand
-            });
-            return new SelectList(brands, "Value", "Text");
-        }
-        private IEnumerable<SelectListItem> GetWeights()
-        {
-            var database = new TestDbContext();
-            var weights = database.Weight.Select(b => new SelectListItem
-            {
-                Value = b.ID.ToString(),
-                Text = b.PaperWeight.ToString()
-            });
-            return new SelectList(weights, "Value", "Text");
-        }
-        private IEnumerable<SelectListItem> GetWidths()
-        {
-            var database = new TestDbContext();
-            var widths = database.Width.Select(b => new SelectListItem
-            {
-                Value = b.ID.ToString(),
-                Text = b.PaperWidth.ToString()
-            });
-            return new SelectList(widths, "Value", "Text");
-        }
         // GET: ClientOrder/Create
         [HttpGet]
         public ActionResult Create()
         {
-            var model = new ProductionViewModel
+            var model = new NewOrderViewModel
             {
                 AvaiableBrands = GetBrands(),
                 AvaiableWeights = GetWeights(),
@@ -82,7 +52,7 @@ namespace KPMTestEMS.Controllers
         // POST: ClientOrder/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateOrder(ProductionViewModel model)
+        public ActionResult CreateOrder(NewOrderViewModel model)
         {
             var errors = ModelState
                 .Where(x => x.Value.Errors.Count > 0)
@@ -124,5 +94,39 @@ namespace KPMTestEMS.Controllers
             }
 
         }
+        #region HelperMethods
+        // Those methods create enumerable lists for
+        // NewOrderViewModel to be filled in order form
+        //private IEnumerable<SelectListItem> GetBrands()
+        //{
+        //    var database = new TestDbContext();
+        //    var brands = database.Brand.Select(b => new SelectListItem
+        //    {
+        //        Value = b.ID.ToString(),
+        //        Text = b.PaperBrand
+        //    });
+        //    return new SelectList(brands, "Value", "Text");
+        //}
+        //private IEnumerable<SelectListItem> GetWeights()
+        //{
+        //    var database = new TestDbContext();
+        //    var weights = database.Weight.Select(b => new SelectListItem
+        //    {
+        //        Value = b.ID.ToString(),
+        //        Text = b.PaperWeight.ToString()
+        //    });
+        //    return new SelectList(weights, "Value", "Text");
+        //}
+        //private IEnumerable<SelectListItem> GetWidths()
+        //{
+        //    var database = new TestDbContext();
+        //    var widths = database.Width.Select(b => new SelectListItem
+        //    {
+        //        Value = b.ID.ToString(),
+        //        Text = b.PaperWidth.ToString()
+        //    });
+        //    return new SelectList(widths, "Value", "Text");
+        //} 
+        #endregion
     }
 }

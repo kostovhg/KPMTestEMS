@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace KPMTestEMS.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ApplicationBaseController
     {
         // GET: Home/Index
         public ActionResult Index()
@@ -36,13 +36,7 @@ namespace KPMTestEMS.Controllers
         // GET /Home/ViewProducts
         public ActionResult ViewProducts()
         {
-            TestDbContext database = new TestDbContext();
-
-            var model = new ProductionViewModel();
-
-            //model.Brand = database.Brand;
-            //model.Width = database.Width;
-            
+            var model = new ProductsViewModel();
 
             return View(model);
         }

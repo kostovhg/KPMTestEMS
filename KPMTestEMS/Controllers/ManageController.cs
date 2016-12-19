@@ -14,7 +14,7 @@ using System.IO;
 namespace KPMTestEMS.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : ApplicationBaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -69,7 +69,10 @@ namespace KPMTestEMS.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+
+            var model = new ClientOptionsViewModel();
+
+            var indexModel= new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
@@ -77,6 +80,18 @@ namespace KPMTestEMS.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+
+            var orderModel = new NewOrderViewModel
+            {
+                AvaiableBrands = GetBrands(),
+                AvaiableWeights = GetWeights(),
+                AvaiableWidths = GetWidths(),
+                DueDate = DateTime.Now
+            };
+
+            model.IndexVM = indexModel;
+            model.newOrder = orderModel;
+      
             return View(model);
         }
 

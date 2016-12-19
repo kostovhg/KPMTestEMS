@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicationBaseController.cs" />
     <Compile Include="Controllers\ClientOrderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -181,8 +182,8 @@
     <Compile Include="Models\ClientOrder.cs" />
     <Compile Include="Models\Helpers\SeedHelper.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
-    <Compile Include="Models\ViewModels\OrderViewModel.cs" />
-    <Compile Include="Models\ViewModels\ProductionViewModel.cs" />
+    <Compile Include="Models\ViewModels\ProductsViewModel.cs" />
+    <Compile Include="Models\ViewModels\NewOrderViewModel.cs" />
     <Compile Include="Models\Production\Brand.cs" />
     <Compile Include="Models\Production\Weight.cs" />
     <Compile Include="Models\Production\Width.cs" />
@@ -369,10 +370,13 @@
     <Content Include="Views\Home\ViewProducts.cshtml" />
     <Content Include="Views\Manage\ProfileDetails.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\Manage\_ProfileDetails.cshtml" />
+    <Content Include="Views\Manage\_CreateOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\Profile\" />
+    <Folder Include="Views\ApplicationBase\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

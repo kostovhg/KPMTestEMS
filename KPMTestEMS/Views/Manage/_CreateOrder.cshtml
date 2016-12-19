@@ -1,5 +1,5 @@
 ﻿@model KPMTestEMS.Models.NewOrderViewModel
-
+@using System.Web.Mvc.Html
 @{
     ViewBag.Title = "Order";
 }
@@ -77,7 +77,7 @@
             </div>
             <!-- Textbox for quantity -->
             <div class="form-group">
-                @Html.LabelFor(m => m.Quantity, new { @class= "col-md-4 control-label"})
+                @Html.LabelFor(m => m.Quantity, new { @class = "col-md-4 control-label" })
                 <div class="col-md-4">
                     @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control" })
                 </div>
@@ -99,3 +99,4 @@
         }
     </div>
 </div>
+

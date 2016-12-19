@@ -16,19 +16,17 @@
         <dd>
             @if (User.Identity.GetUserName() != null)
             {
-                <div class="upimage">
-                    <div class="accimg">
-                        @{
-                            var relativePath = "/Content/Images/Profile/" + User.Identity.GetUserName() + ".png";
-                            var imgUrl = Url.Content(relativePath) + "?time=" + DateTime.Now.ToString();
-                            var absolutePath = System.Web.HttpContext.Current.Server.MapPath("~/" + relativePath);
-                            if (System.IO.File.Exists(absolutePath))
-                            {
-                                @Html.Image(imgUrl, "ProfilePicture", "250")
-                            }
+                <div class="accimg">
+                    @{
+                        var relativePath = "/Content/Images/Profile/" + User.Identity.GetUserName() + ".png";
+                        var imgUrl = Url.Content(relativePath) + "?time=" + DateTime.Now.ToString();
+                        var absolutePath = System.Web.HttpContext.Current.Server.MapPath("~/" + relativePath);
+                        if (System.IO.File.Exists(absolutePath))
+                        {
+                            @Html.Image(imgUrl, "ProfilePicture", "250")
                         }
-                        @*<img src="@imgUrl" height="250" width="250" />*@
-                    </div>
+                    }
+                    @*<img src="@imgUrl" height="250" width="250" />*@
                 </div>
                 <div class="mngimg">
                     @using (Html.BeginForm("UploadPhoto", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -38,7 +36,7 @@
                         <input type="submit" value="Upload" />
                     }
                 </div>
-            }
+                        }
         </dd>
 
         <dt>Details:</dt>

@@ -14,7 +14,7 @@ using System.Diagnostics;
 namespace KPMTestEMS.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : ApplicationBaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

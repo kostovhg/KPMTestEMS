@@ -14,14 +14,14 @@
                     var absolutePath = System.Web.HttpContext.Current.Server.MapPath("~/" + relativePath);
                     if (System.IO.File.Exists(absolutePath))
                     {
-                    @Html.Image(imgUrl, "ProfilePicture", "50")
-                        }
+                        @Html.Image(imgUrl, "ProfilePicture", "50")
                     }
+                }
                 @*<img src="@imgUrl" height="50" width="50" />*@
             </li>
 
             <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Hello " + (ViewData["FullName"]) + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
