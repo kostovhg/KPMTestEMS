@@ -7,8 +7,6 @@
 <script type="text/javascript" src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
 @*<script type="text/javascript" src="~/Scripts/DatePickerReady.js"></script>*@
 
-
-
 <script type="text/javascript">
     $(function () {
         $("#datepicker").datepicker(
@@ -28,96 +26,76 @@
     }
 </style>
 
-
 <div class="container col-lg-10 col-md-10 col-sm-12 col-xs-12">
     <div class="page-header">
         <h2>Create order</h2>
     </div>
     <p>Choose properties and width</p>
-
+    <!-- ProductionViewModel holds propertes for AvaiableBrands, AvaiableWeights
+        and AvaiableWidths, those properties are
+        filled from ClientOrderController get method "Create"
+        and its helper methods GetBrands(), GetWeigths() and GetWidths()
+        For returning form data, ProductionViewModel have Selected{prop}Id properties
+        wich will be send to post method "CreateOrder" in ClientOrderController -->
     <div class="well">
-        @using (Html.BeginForm("CreateOrder", "ClientOrder", FormMethod.Post, new { @class = "form-horizontal"}))
+        @using (Html.BeginForm("CreateOrder", "ClientOrder", FormMethod.Post, new { @class = "form-horizontal" }))
 
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary()
 
+            <!-- Radiobutton group for choosing between avaiable brands -->
             <div class="form-group">
-                <label class="control-label col-sm-4" for="select_brand">Select Brand:</label>
+                <label class="control-label col-md-4" for="select_brand">Select Brand:</label>
                 <div class="col-md-4">
-                    @foreach (var item in Model.BrandList)
+                    @foreach (var item in Model.AvaiableBrands)
                     {
-                        <div>@Html.RadioButtonFor(s => s.SelectedBrand, item.Value, new { @class = "radio-inline" , name="select_brand"})@item.Text</div>
+                        <div>@Html.RadioButtonFor(s => s.SelectedBrandId, item.Value, new { @class = "radio-inline", name = "select_brand" })@item.Text</div>
                     }
                 </div>
-
             </div>
-            @*<div class="form-group">
-                <label for="select_weight" class="control-label col-md-4">Select weight</label>
+            <!-- Dropdown list group for choosing between avaiable weights -->
+            <div class="form-group">
+                <label class="control-label col-md-4" for="select_weight">Select Width:</label>
                 <div class="col-md-4">
-                    @Html.DropDownList("select_weight", new { Model.WeightList}, null)
+                    @Html.DropDownListFor(m => m.SelectedWeightId, Model.AvaiableWeights, new { @class = "form-control col-xs-4 col-sm-4", name = "select_weight" })
                 </div>
-            </div>*@
-        @*<div class="form-group">
-                <label for="select_weight" class="control-label col-md-4">Select weight</label>
+            </div>
+            <!-- Listbox group for choosing between avaiable widths -->
+            <div class="form-group">
+                <label class="control-label col-md-4" for="select_weight">Select Weight:</label>
                 <div class="col-md-4">
-                    <select class="form-control col-sm-4" id="select_weight">
-                        @foreach (var weight in Model.WeightList)
-                        {
-                            @Html.Op
-                            <option>@weight.WeightValue</option>
-                        }
-                    </select>
+                    @Html.ListBoxFor(m => m.SelectedWidthId, Model.AvaiableWidths, new { @class = "form-control col-xs-4 col-sm-4", name = "select_weight" })
                 </div>
-            </div>*@
-
-                    @*<div class="form-group">
-                        <label for="select_weight" class="control-label col-sm-4">Select weight</label>
-                        <div class="col-sm-4">
-                            <select class="form-control col-xs-4 col-sm-4" id="select_weight">
-
-                            </select>
-                        </div>*@
-                    @*<div class="col-sm-push-3">
-                            <p>Grams per square meter</p>
-                        </div>*@
-                    @*</div>*@
-
-                    @*<div class="form-group">
-                        <label for="select_width" class="control-label col-sm-4">Select width</label>
-                        <div class="col-sm-4">
-                            <select multiple="" class="form-control col-xs-4 col-sm-4" id="select_width">*@
-                    @*@foreach (var width in Model.Width)
-                                    {
-                                        <option>@width.PaperWidth</option>
-                                    }
-                                </select>
-                            </div>
-                        </div>*@
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.DueDate, new { @class = "control-label col-sm-4", @for = "datepicker" })
-        <div class="col-sm-4">
-            @Html.TextBoxFor(m => m.DueDate, "{0:dd-MM-yyyy}", new { @class = "form-control col-xs-4 col-sm-4 datepicker", @id = "datepicker" })
-        </div>
-
-    </div>
-
-                    @*<div class="form-group">
-                            <label for="textArea" class="control-label col-sm-4">Your comments</label>
-                            <div class="col-sm-4">
-                                <textarea class="form-control col-xs-4 col-sm-4" rows="3" id="textArea"></textarea>
-                            </div>
-                        </div>*@
-
-    <div class="form-group">
-        <div class="col-sm-4 col-sm-offset-4">
-            <button type="reset" class="btn btn-default">Cancel</button>
-                            @*@Html.ActionLink("Order", "CreateOrder", "ClientOrder", null, new { @class = "btn btn-primary", type = "submit" })*@
-            <input type="submit" value="Send" class="btn btn-primary" />
-        </div>
-    </div>
+            </div>
+            <!-- Datepicker // TODO: change formats, add rules, restrictions and error reports -->
+            <div class="form-group">
+                @Html.LabelFor(m => m.DueDate, new { @class = "control-label col-sm-4", @for = "datepicker" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.DueDate, "{0:dd-MM-yyyy}", new { @class = "form-control col-xs-4 col-sm-4 datepicker", @id = "datepicker" })
+                </div>
+            </div>
+            <!-- Textbox for quantity -->
+            <div class="form-group">
+                @Html.LabelFor(m => m.Quantity, new { @class= "col-md-4 control-label"})
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control" })
+                </div>
+            </div>
+            <!-- Textarea for comment, not required -->
+            <div class="form-group">
+                <label for="textArea" class="control-label col-sm-4">Your comments</label>
+                <div class="col-sm-4">
+                    <textarea class="form-control col-xs-4 col-sm-4" rows="3" id="textArea"></textarea>
+                </div>
+            </div>
+            <!-- Buttons // TODO: redirect Cancel buton -->
+            <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <button type="reset" class="btn btn-default">Cancel</button>
+                    <input type="submit" value="Send" class="btn btn-primary" />
+                </div>
+            </div>
         }
-
-</div>
+    </div>
 </div>

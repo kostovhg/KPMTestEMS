@@ -1,7 +1,8 @@
 ﻿@model KPMTestEMS.Models.IndexViewModel
+@using MvcApplication8.Models
 @using Microsoft.AspNet.Identity
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Your profile page";
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -15,10 +16,18 @@
         <dd>
             @if (User.Identity.GetUserName() != null)
             {
-                var imgUrl = Url.Content("~/Content/Images/Profile/" + User.Identity.GetUserName() + ".png") + "?time=" + DateTime.Now.ToString();
                 <div class="upimage">
                     <div class="accimg">
-                        <img src="@imgUrl" height="250" width="250" />
+                        @{
+                            var relativePath = "/Content/Images/Profile/" + User.Identity.GetUserName() + ".png";
+                            var imgUrl = Url.Content(relativePath) + "?time=" + DateTime.Now.ToString();
+                            var absolutePath = System.Web.HttpContext.Current.Server.MapPath("~/" + relativePath);
+                            if (System.IO.File.Exists(absolutePath))
+                            {
+                                @Html.Image(imgUrl, "ProfilePicture", "250")
+                            }
+                        }
+                        @*<img src="@imgUrl" height="250" width="250" />*@
                     </div>
                 </div>
                 <div class="mngimg">
@@ -32,7 +41,7 @@
             }
         </dd>
 
-        <dt>Password:</dt>
+        <dt>Details:</dt>
         <dd>
             [
             @if (Model.HasPassword)

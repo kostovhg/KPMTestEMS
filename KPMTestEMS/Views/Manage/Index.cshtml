@@ -1,4 +1,5 @@
 ﻿@model KPMTestEMS.Models.IndexViewModel
+    @using MvcApplication8.Models
     @using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Your profile page";
@@ -15,11 +16,17 @@
         <dd>
             @if (User.Identity.GetUserName() != null)
             {
-                var imgUrl = Url.Content("~/Content/Images/Profile/" + User.Identity.GetUserName() + ".png") + "?time=" + DateTime.Now.ToString();
-                <div class="upimage">
-                    <div class="accimg">
-                        <img src="@imgUrl" height="250" width="250"/>
-                    </div>
+                <div class="accimg">
+                    @{
+                        var relativePath = "/Content/Images/Profile/" + User.Identity.GetUserName() + ".png";
+                        var imgUrl = Url.Content(relativePath) + "?time=" + DateTime.Now.ToString();
+                        var absolutePath = System.Web.HttpContext.Current.Server.MapPath("~/" + relativePath);
+                        if (System.IO.File.Exists(absolutePath))
+                        {
+                            @Html.Image(imgUrl, "ProfilePicture", "250")
+                        }
+                    }
+                    @*<img src="@imgUrl" height="250" width="250" />*@
                 </div>
                 <div class="mngimg">
                     @using (Html.BeginForm("UploadPhoto", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))

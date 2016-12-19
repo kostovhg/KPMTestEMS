@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KPMTestEMS.Models.Production;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -20,18 +21,22 @@ namespace KPMTestEMS.Models
         public virtual ApplicationUser Client { get; set; }
 
         [Required]
-        //[ForeignKey("Brand")]
-        public int Brand { get; set; }
+        [ForeignKey("Brand")]
+        public int BrandId { get; set; }
+        public virtual Brand Brand { get; set; }
 
         [Required]
-        //[ForeignKey("Weight")]
-        public int Weight { get; set; }
+        [ForeignKey("Weight")]
+        public int WeightId { get; set; }
+        
+        public virtual Weight Weight{ get; set; }
 
         [Required]
-        //[ForeignKey("Width")]
-        public int Width { get; set; }
+        [ForeignKey("Width")]
+        public int WidthId { get; set; }
+        public virtual Width Width{ get; set; }
 
-        [Required]
+    [Required]
         public int Quantity { get; set; }
 
         [DataType(DataType.Date)]
@@ -54,14 +59,17 @@ namespace KPMTestEMS.Models
             int weight,
             int width,
             DateTime dueDate,
-            int quantity
+            int quantity,
+            string comment
             )
         {
             this.ClientId = clientId;
-            this.Brand = brand;
-            this.Weight = weight;
-            this.Width = width;
+            this.BrandId = brand;
+            this.WeightId = weight;
+            this.WidthId = width;
             this.DueDate = dueDate;
+            this.Quantity = quantity;
+            this.Comment = comment;
         }
     }
 }

@@ -1,29 +1,36 @@
 ﻿@using Microsoft.AspNet.Identity
+@using MvcApplication8.Models
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @{ 
-                var imgUrl = Url.Content("~/Content/Images/Profile/" + User.Identity.GetUserName() + ".png") + "?time=" + DateTime.Now.ToString();
-            }
-            <img src="@imgUrl" height="50" width="50" />
-        </li>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @{
+                    var relativePath = "/Content/Images/Profile/" + User.Identity.GetUserName() + ".png";
+                    var imgUrl = Url.Content(relativePath) + "?time=" + DateTime.Now.ToString();
+                    var absolutePath = System.Web.HttpContext.Current.Server.MapPath("~/" + relativePath);
+                    if (System.IO.File.Exists(absolutePath))
+                    {
+                    @Html.Image(imgUrl, "ProfilePicture", "50")
+                        }
+                    }
+                @*<img src="@imgUrl" height="50" width="50" />*@
+            </li>
 
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
-    }
-}
-else
-{
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
-}
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+                        }
+                    }
+                    else
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                        </ul>
+                    }
