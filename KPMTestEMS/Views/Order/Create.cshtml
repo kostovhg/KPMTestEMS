@@ -38,7 +38,7 @@
         For returning form data, ProductionViewModel have Selected{prop}Id properties
         wich will be send to post method "CreateOrder" in ClientOrderController -->
     <div class="well">
-        @using (Html.BeginForm("CreateOrder", "ClientOrder", FormMethod.Post, new { @class = "form-horizontal" }))
+        @using (Html.BeginForm("CreateOrder", "Order", FormMethod.Post, new { @class = "form-horizontal" }))
 
         {
             @Html.AntiForgeryToken()

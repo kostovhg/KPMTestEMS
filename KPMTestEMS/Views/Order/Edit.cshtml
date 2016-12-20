@@ -1,7 +1,4 @@
-﻿
-<h2>Edit</h2>
-
-@model KPMTestEMS.Models.OrderViewModel
+﻿@model KPMTestEMS.Models.OrderViewModel
 
 
 @{
@@ -12,7 +9,7 @@
 <script type="text/javascript" src="~/Scripts/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
 @*<script type="text/javascript" src="~/Scripts/DatePickerReady.js"></script>*@
-
+<h2>Edit</h2>
 <script type="text/javascript">
     $(function () {
         $("#datepicker").datepicker(
@@ -44,7 +41,7 @@
         For returning form data, ProductionViewModel have Selected{prop}Id properties
         wich will be send to post method "CreateOrder" in ClientOrderController -->
     <div class="well">
-        @using (Html.BeginForm("CreateOrder", "ClientOrder", FormMethod.Post, new { @class = "form-horizontal" }))
+        @using (Html.BeginForm("CreateOrder", "Order", FormMethod.Post, new { @class = "form-horizontal" }))
 
         {
             @Html.AntiForgeryToken()

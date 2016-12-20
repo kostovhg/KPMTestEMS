@@ -122,13 +122,13 @@ namespace KPMTestEMS.Controllers
         // Get: /Manage/List
         public ActionResult List()
         {
-            return RedirectToAction("List", "ClientOrder");
+            return RedirectToAction("List", "Order");
         }
 
         // Get: /Manage/Create
         public ActionResult Create()
         {
-            return RedirectToAction("Create", "ClientOrder");
+            return RedirectToAction("Create", "Order");
         }
 
         //

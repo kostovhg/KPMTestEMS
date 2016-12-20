@@ -4,19 +4,15 @@
     ViewBag.Title = "List";
     ViewData["Title"] = "List client orders";
 
-    //string currentFilter = ViewBag.CurrentFilter;
-    //string currentSort = ViewBag.CurrentSort;
-    //if (string.IsNullOrEmpty(currentSort))
-    //{
-    //    currentSort = "date_desc";
-    //}
+    string currentFilter = ViewBag.CurrentFilter;
+    string currentSort = ViewBag.CurrentSort;
+    if (string.IsNullOrEmpty(currentSort))
+    {
+        currentSort = "date_desc";
+    }
 }
 
-<h2>List</h2>
-
-@*<p>
-    <a asp-action="Create New"</a>
-</p>*@
+<h2>List Orders</h2>
 
 <div class="wrapper">
     <form action="List" method="get">
@@ -33,7 +29,7 @@
         <table class="table table-striped table-condensed table-hover">
             <tr>
                 <th>
-                    #
+                    @Html.ActionLink("ID", "List", new { sortOrder = ViewBag.IdSortParam })
                 </th>
                 <th>
                     @Html.ActionLink("Date", "List", new { sortOrder = ViewBag.DateSortParam })
@@ -56,11 +52,11 @@
                     @*@Html.DisplayNameFor(m => m.Quantity)*@
                 </th>
                 <th>
-                    @Html.ActionLink("Width", "List", new { sortOrder = ViewBag.QuantitySortParam })
+                    @Html.ActionLink("Width", "List", new { sortOrder = ViewBag.WidthSortParam })
                     @*@Html.DisplayNameFor(m => m.Quantity)*@
                 </th>
                 <th>
-                    @Html.ActionLink("Status", "List", new { sortOrder = ViewBag.QuantitySortParam })
+                    @Html.ActionLink("Status", "List", new { sortOrder = ViewBag.StatusSortParam })
                     @*@Html.DisplayNameFor(m => m.Quantity)*@
                 </th>
                 <th>Options</th>
@@ -107,9 +103,9 @@
                         </td>
 
                         <td>
-                            @Html.ActionLink("View", "Edit", "Orders", new { @id = item.ID }, new { @class = "btn btn-info btn-xs" })
-                            @Html.ActionLink("Edit", "Edit", "Orders", new { @id = item.ID }, new { @class="btn btn-warning btn-xs" })
-                            @Html.ActionLink("Details", "Delete", "User", new { @id = item.ID }, new { @class = "btn btn-danger btn-xs" })
+                            @Html.ActionLink("View", "Edit", "Order", new { @id = item.ID }, new { @class = "btn btn-info btn-xs" })
+                            @Html.ActionLink("Edit", "Edit", "Order", new { @id = item.ID }, new { @class="btn btn-warning btn-xs" })
+                            @Html.ActionLink("Details", "Delete", "Order", new { @id = item.ID }, new { @class = "btn btn-danger btn-xs" })
                         </td>
                     </tr>
                 }

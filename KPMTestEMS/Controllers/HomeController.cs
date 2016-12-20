@@ -47,16 +47,23 @@ namespace KPMTestEMS.Controllers
             return RedirectToAction("ProfileDetails", "Manage");
         }
 
+        #region HelperMethods
+        public ActionResult UnderConstruction()
+        {
+            return View();
+        }
+
         // Get: /Home/Create
         public ActionResult Create()
         {
-            return RedirectToAction("Create", "ClientOrder");
+            return RedirectToAction("Create", "Order");
         }
 
         // Get: /Home/List
         public ActionResult List()
         {
-            return RedirectToAction("List", "ClientOrder");
+            return RedirectToAction("List", "Order");
         }
+        #endregion
     }
 }

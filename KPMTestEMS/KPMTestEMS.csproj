@@ -173,11 +173,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationBaseController.cs" />
-    <Compile Include="Controllers\ClientOrderController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\Trader\OrdersController.cs" />
-    <Compile Include="Controllers\Trader\ProductsController.cs" />
+    <Compile Include="Controllers\Trader\ClientController.cs" />
+    <Compile Include="Controllers\Trader\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -370,22 +370,23 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\ClientOrder\List.cshtml" />
-    <Content Include="Views\ClientOrder\Create.cshtml" />
+    <Content Include="Views\Order\Create.cshtml" />
     <Content Include="Scripts\jquery.validate.date.js" />
     <Content Include="Views\Home\ViewProducts.cshtml" />
     <Content Include="Views\Manage\ProfileDetails.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Manage\_ProfileDetails.cshtml" />
     <Content Include="Views\Manage\_CreateOrder.cshtml" />
-    <Content Include="Views\Orders\List.cshtml" />
-    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Order\List.cshtml" />
+    <Content Include="Views\Order\Edit.cshtml" />
+    <Content Include="Views\Shared\UnderConstruction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\Profile\" />
     <Folder Include="Models\Orders\" />
     <Folder Include="Views\ApplicationBase\" />
+    <Folder Include="Views\Client\" />
     <Folder Include="Views\Products\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "UnderConstruction";
+}
+
+<h2>UnderConstruction</h2>
+<span>&nbsp;</span>
+<h4>We are apologize for any inconvenience caused</h4>
+<span>&nbsp;</span>
+<a href="javascript:void(0);" onclick="history.go(-1);" class="btn-default">Back to previous page</a>
+<p>&nbsp;</p>
+<img src="~/Content/Images/page_under_construction.jpg" />
+
+<!-- Source: http://stackoverflow.com/questions/18465895/on-html-actionlink-click-go-to-previous-page -->
+
+<script type="text/javascript">
+    $(document).on('click', '#backLink', function () {
+        history.go(-1);
+    });
+</script>
