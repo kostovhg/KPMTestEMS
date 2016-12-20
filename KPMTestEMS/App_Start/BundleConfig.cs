@@ -27,7 +27,7 @@ namespace KPMTestEMS
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-paper.css",
+                      "~/Content/bootstrap-sandstone.css",
                       "~/Content/bootstrap-datepicker3.css",
                       "~/Content/site.css"));
         }

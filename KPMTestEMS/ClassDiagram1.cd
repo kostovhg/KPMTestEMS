@@ -34,11 +34,11 @@
       <Property Name="Width" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="KPMTestEMS.Models.NewOrderViewModel">
+  <Class Name="KPMTestEMS.Models.OrderViewModel">
     <Position X="3" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAEAAABACAAgAAAAAAIAQAEAACAAAAAgAACAAA=</HashCode>
-      <FileName>Models\ViewModels\NewOrderViewModel.cs</FileName>
+      <FileName>Models\ViewModels\OrderViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="KPMTestEMS.Models.ApplicationUser">

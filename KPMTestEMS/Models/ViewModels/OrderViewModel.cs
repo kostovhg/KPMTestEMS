@@ -27,7 +27,7 @@ namespace KPMTestEMS.Models
         //    public int Id { get; set; }
         //    public byte WidthValue { get; set; }
         //}
-    public class NewOrderViewModel
+    public class OrderViewModel
     {
         // create set of paper properties to be send to the view
         // each property represent set of related table regcords.
@@ -45,11 +45,12 @@ namespace KPMTestEMS.Models
         public int Quantity { get; set; }
         public string Comment { get; set; }
 
-        public NewOrderViewModel()
+        public OrderViewModel()
         {
             AvaiableBrands = new List<SelectListItem>();
             AvaiableWeights = new List<SelectListItem>();
             AvaiableWeights = new List<SelectListItem>();
         }
     }
+
 }

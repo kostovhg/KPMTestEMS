@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace KPMTestEMS.Controllers.Trader
 {
+    [Authorize(Roles = "Trader")]
     public class OrdersController : Controller
     {
         // GET: Orders
@@ -20,21 +21,19 @@ namespace KPMTestEMS.Controllers.Trader
         // GET: Orders/List
         public async Task<ActionResult> List(string sortOrder, string searchString)
         {
-            //ViewData["ClientSortParam"] = String.IsNullOrEmpty(sortOrder) ? "data_desc" : "Client";
-            //ViewData["DateSortParam"] = sortOrder == "Date" ? "date_desc" : "Date";
-
-            ViewData["DateSortParam"] = sortOrder == "Data" ? "date_desc" : "Data";
+            ViewData["DateSortParam"] = sortOrder == "Date" ? "date_desc" : "Date";
             ViewData["ClientSortParam"] = sortOrder == "Client" ? "client_desc" : "Client";
             ViewData["BrandSortParam"] = sortOrder == "Brand" ? "brand_desc" : "Brand";
-            ViewData["WeightSortParam"] = sortOrder == "Weight" ? "brand_desc" : "Weight";
-            ViewData["WidthSortParam"] = sortOrder == "Width" ? "brand_desc" : "Width";
+            ViewData["WeightSortParam"] = sortOrder == "Weight" ? "weight_desc" : "Weight";
+            ViewData["WidthSortParam"] = sortOrder == "Width" ? "width_desc" : "Width";
             ViewData["QuantitySortParam"] = sortOrder == "Quantity" ? "quantity_desc" : "Quantity";
             ViewData["StatusSortParam"] = sortOrder == "Status" ? "Status_desc" : "Quantity";
             ViewData["CurrentFilter"] = searchString;
 
             var database = new TestDbContext();
 
-            var orders = from o in database.ClientsOrders where o.Status != "Deleted" select o;
+            //var orders = from o in database.ClientsOrders where o.Status != "Deleted" select o;
+            var orders = from o in database.ClientsOrders select o;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -98,6 +97,27 @@ namespace KPMTestEMS.Controllers.Trader
         }
 
         // GET: Orders/EditOrder
+        public ActionResult Edit(int id)
+        {
+            using (var database = new TestDbContext())
+            {
+                // Get order from database
+                var order = database.ClientsOrders
+                    .Where(o => o.ID == id)
+                    .First();
+
+                // Create a view model
+                var model = new OrderViewModel();
+                model.ClientId = order.ClientId;
+                model.DueDate = order.DueDate;
+                model.Quantity = order.Quantity;
+                model.Comment = order.Comment;
+
+                // Pass the model to the view
+                return View(model);
+            }
+
+        }
 
         // POST: Orders/EditOrder
 

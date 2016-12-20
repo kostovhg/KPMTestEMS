@@ -81,7 +81,7 @@ namespace KPMTestEMS.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
 
-            var orderModel = new NewOrderViewModel
+            var orderModel = new OrderViewModel
             {
                 AvaiableBrands = GetBrands(),
                 AvaiableWeights = GetWeights(),

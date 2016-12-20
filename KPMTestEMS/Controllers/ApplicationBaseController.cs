@@ -31,7 +31,7 @@ namespace KPMTestEMS.Controllers
 
         #region HelperMethods
         // Those methods create enumerable lists for
-        // NewOrderViewModel to be filled in order form
+        // OrderViewModel to be filled in order form
         public IEnumerable<SelectListItem> GetBrands()
         {
             var database = new TestDbContext();

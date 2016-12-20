@@ -88,7 +88,7 @@ namespace KPMTestEMS.Models
 
     public class ClientOptionsViewModel
     {
-        public NewOrderViewModel newOrder { get; set; }
+        public OrderViewModel newOrder { get; set; }
         public IndexViewModel IndexVM { get; set; }
     }
 }

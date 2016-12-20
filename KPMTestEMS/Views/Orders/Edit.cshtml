@@ -1,8 +1,14 @@
-﻿@model KPMTestEMS.Models.OrderViewModel
+﻿
+<h2>Edit</h2>
+
+@model KPMTestEMS.Models.OrderViewModel
+
 
 @{
-    ViewBag.Title = "Order";
+    ViewBag.Title = "Edit";
 }
+
+
 <script type="text/javascript" src="~/Scripts/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
 @*<script type="text/javascript" src="~/Scripts/DatePickerReady.js"></script>*@
@@ -77,7 +83,7 @@
             </div>
             <!-- Textbox for quantity -->
             <div class="form-group">
-                @Html.LabelFor(m => m.Quantity, new { @class= "col-md-4 control-label"})
+                @Html.LabelFor(m => m.Quantity, new { @class = "col-md-4 control-label" })
                 <div class="col-md-4">
                     @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control" })
                 </div>

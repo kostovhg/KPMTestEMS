@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace KPMTestEMS.Controllers
 {
-    [Authorize]
+    //[Authorize(Roles = "Client")]
     public class ClientOrderController : ApplicationBaseController
     {
         // GET: ClientsOrders
@@ -42,7 +42,7 @@ namespace KPMTestEMS.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var model = new NewOrderViewModel
+            var model = new OrderViewModel
             {
                 AvaiableBrands = GetBrands(),
                 AvaiableWeights = GetWeights(),
@@ -56,7 +56,7 @@ namespace KPMTestEMS.Controllers
         // POST: ClientOrder/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateOrder(NewOrderViewModel model)
+        public ActionResult CreateOrder(OrderViewModel model)
         {
             var errors = ModelState
                 .Where(x => x.Value.Errors.Count > 0)
@@ -109,7 +109,7 @@ namespace KPMTestEMS.Controllers
 
         #region HelperMethods
         // Those methods create enumerable lists for
-        // NewOrderViewModel to be filled in order form
+        // OrderViewModel to be filled in order form
         //private IEnumerable<SelectListItem> GetBrands()
         //{
         //    var database = new TestDbContext();

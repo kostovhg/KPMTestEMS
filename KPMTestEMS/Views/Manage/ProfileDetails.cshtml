@@ -3,6 +3,10 @@
 @using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Your profile page";
+    var UserId = User.Identity.GetUserId();
+    var UserName = User.Identity.GetUserName();
+    var FullName = ViewData["FullName"];
+    ViewBag.Title = FullName + " profile page";
 }
 
 <h2>@ViewBag.Title.</h2>
