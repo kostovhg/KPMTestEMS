@@ -16,6 +16,15 @@
     <h4>Create orders, view orders, edit and delete orders, and manage your profile.</h4>
     <hr />
 
-    @Html.Partial("_ProfileDetails", Model.IndexVM)
-    @Html.Partial("_CreateOrder", Model.newOrder)
+    <div class="well">
+        <div class="form-group">
+            @Html.ActionLink("Manage profile", "ProfileDetails", "Manage", new { @class = "btn btn-default" })
+            @Html.ActionLink("View your orders", "List", "ClientOrder", new { @class="btn btn-default"})
+            @Html.ActionLink("Create order", "Create", "ClientOrder", new { @class = "btn btn-default" })
+        </div>
+    </div>
+
+
+    @*@Html.Partial("_ProfileDetails", Model.IndexVM)
+    @Html.Partial("_CreateOrder", Model.newOrder)*@
 </div>

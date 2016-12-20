@@ -21,6 +21,10 @@ namespace KPMTestEMS.Controllers
         [HttpGet]
         public ActionResult List()
         {
+            if (User.IsInRole("Trader") || User.IsInRole("Admin"))
+            {
+                return RedirectToAction("List", "Orders");
+            }
             TestDbContext database = new TestDbContext();
 
             var id = User.Identity.GetUserId();
@@ -82,6 +86,7 @@ namespace KPMTestEMS.Controllers
                     int.Parse(model.SelectedWidthId),
                     model.DueDate,
                     model.Quantity,
+                    "Pending",
                     model.Comment
                     );
 
@@ -94,6 +99,14 @@ namespace KPMTestEMS.Controllers
             }
 
         }
+
+        // GET: ClientOrder/ProfileDetails
+        public ActionResult ProfileDetails()
+        {
+            return RedirectToAction("ProfileDetails", "Manage");
+        }
+
+
         #region HelperMethods
         // Those methods create enumerable lists for
         // NewOrderViewModel to be filled in order form

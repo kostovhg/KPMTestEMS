@@ -1,2 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="KPMTestEMS.Models.Production.Brand">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIggIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Production\Brand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KPMTestEMS.Models.Production.Weight">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Production\Weight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KPMTestEMS.Models.Production.Width">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Production\Width.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KPMTestEMS.Models.ClientOrder">
+    <Position X="3" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAEAgCAAgAAAAEAAQCAAAAAAAAAAhAARAAQ=</HashCode>
+      <FileName>Models\ClientOrder.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Brand" />
+      <Property Name="Client" />
+      <Property Name="Weight" />
+      <Property Name="Width" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="KPMTestEMS.Models.NewOrderViewModel">
+    <Position X="3" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAABACAAgAAAAAAIAQAEAACAAAAAgAACAAA=</HashCode>
+      <FileName>Models\ViewModels\NewOrderViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KPMTestEMS.Models.ApplicationUser">
+    <Position X="6.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAIAgAAAAAAAAAQAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Models\ApplicationUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

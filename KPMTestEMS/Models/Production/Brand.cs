@@ -18,6 +18,5 @@ namespace KPMTestEMS.Models.Production
         public string Description { get; set; }
         [Required]
         public string FullName { get; set; }
-
     }
 }

@@ -40,5 +40,23 @@ namespace KPMTestEMS.Controllers
 
             return View(model);
         }
+
+        // Get: /Home/ProfileDetails
+        public ActionResult ProfileDetails()
+        {
+            return RedirectToAction("ProfileDetails", "Manage");
+        }
+
+        // Get: /Home/Create
+        public ActionResult Create()
+        {
+            return RedirectToAction("Create", "ClientOrder");
+        }
+
+        // Get: /Home/List
+        public ActionResult List()
+        {
+            return RedirectToAction("List", "ClientOrder");
+        }
     }
 }

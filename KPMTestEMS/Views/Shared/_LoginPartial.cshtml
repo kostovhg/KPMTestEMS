@@ -7,16 +7,48 @@
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
+                @if(User.IsInRole("Admin"))
+        {
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin options<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>@Html.ActionLink("Users", "List", "User")</li>
+                    <li>@Html.ActionLink("Orders", "List", "User")</li>
+                </ul>
+            </li>
+        }
+        @if(User.IsInRole("Trader"))
+        {
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Trader options<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>@Html.ActionLink("Orders", "List", "Orders", null)</li>
+                    <li>@Html.ActionLink("Clients", "#", "#")</li>
+                    <li>@Html.ActionLink("Products", "#", "#")</li>
+                </ul>
+            </li>
+        }
+            @if (User.IsInRole("Client"))
+            {
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Client options<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Manage profile", "ProfileDetails",  new { @class = "btn btn-default" , area = "Manage"})</li>
+                        <li>@Html.ActionLink("View your orders", "List", "ClientOrder", new { @class = "btn btn-default" })</li>
+                        <li>@Html.ActionLink("Create order", "Create", "ClientOrder", new { @class = "btn btn-default" })</li>
+                    </ul>
+                </li>
+            }
             <li>
                 @{
-                    var relativePath = "/Content/Images/Profile/" + User.Identity.GetUserName() + ".png";
-                    var imgUrl = Url.Content(relativePath) + "?time=" + DateTime.Now.ToString();
-                    var absolutePath = System.Web.HttpContext.Current.Server.MapPath("~/" + relativePath);
-                    if (System.IO.File.Exists(absolutePath))
-                    {
-                        @Html.Image(imgUrl, "ProfilePicture", "50")
+            var relativePath = "/Content/Images/Profile/" + User.Identity.GetUserName() + ".png";
+            var imgUrl = Url.Content(relativePath) + "?time=" + DateTime.Now.ToString();
+            var absolutePath = System.Web.HttpContext.Current.Server.MapPath("~/" + relativePath);
+            if (System.IO.File.Exists(absolutePath))
+            {
+                @Html.Image(imgUrl, "ProfilePicture", "50")
                     }
-                }
+        }
                 @*<img src="@imgUrl" height="50" width="50" />*@
             </li>
 

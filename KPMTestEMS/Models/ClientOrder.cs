@@ -60,6 +60,7 @@ namespace KPMTestEMS.Models
             int width,
             DateTime dueDate,
             int quantity,
+            string status,
             string comment
             )
         {
@@ -69,6 +70,7 @@ namespace KPMTestEMS.Models
             this.WidthId = width;
             this.DueDate = dueDate;
             this.Quantity = quantity;
+            this.Status = status;
             this.Comment = comment;
         }
     }
