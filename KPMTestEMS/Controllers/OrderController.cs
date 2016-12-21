@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace KPMTestEMS.Controllers
 {
     // Controller for handling operations with Orders
@@ -22,10 +23,12 @@ namespace KPMTestEMS.Controllers
         }
 
         // GET: Order/List
-        public async Task<ActionResult> List(string sortOrder, string searchString)
+        // Source: https://www.asp.net/mvc/overview/getting-started/getting-started-with-ef-using-mvc/sorting-filtering-and-paging-with-the-entity-framework-in-an-asp-net-mvc-application
+        public async Task<ActionResult> List(string sortOrder, string currentFilter, string searchString, int? page)
         {
             #region SwitchSortingParameters
-            ViewData["IdSortParam"] = sortOrder == "Id" ? "id_desc" : "";
+            ViewBag.CurrentSort = sortOrder;
+            ViewData["IdSortParam"] = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
             ViewData["DateSortParam"] = sortOrder == "Date" ? "date_desc" : "Date";
             ViewData["ClientSortParam"] = sortOrder == "Client" ? "client_desc" : "Client";
             ViewData["BrandSortParam"] = sortOrder == "Brand" ? "brand_desc" : "Brand";
@@ -34,6 +37,17 @@ namespace KPMTestEMS.Controllers
             ViewData["QuantitySortParam"] = sortOrder == "Quantity" ? "quantity_desc" : "Quantity";
             ViewData["StatusSortParam"] = sortOrder == "Status" ? "status_desc" : "Status";
             ViewData["CurrentFilter"] = searchString;
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
             #endregion
             // Create instance of database, take curent user id
             var database = new TestDbContext();
@@ -42,9 +56,10 @@ namespace KPMTestEMS.Controllers
             IQueryable<ClientOrder> orders;
 
             // Filter orders for logget user if he is a client
-            if (User.IsInRole("Client"))
+            if (User.IsInRole("Trader") || User.IsInRole("Admin"))
             {
-                orders = from o in database.ClientsOrders where o.ClientId == id select o;
+                orders = from o in database.ClientsOrders select o;
+
                 // Check if there is search string in URI and filter by users if such exist
                 // Search is currently avaiable only for Admin and Trader
                 if (!String.IsNullOrEmpty(searchString))
@@ -55,7 +70,7 @@ namespace KPMTestEMS.Controllers
             }
             else
             {
-                orders = from o in database.ClientsOrders select o;
+                orders = from o in database.ClientsOrders where o.ClientId == id select o;
             }
 
             #region Sorting
@@ -98,12 +113,12 @@ namespace KPMTestEMS.Controllers
                     orders = orders.OrderBy(o => o.Quantity);
                     break;
                 case "status_desc":
-                    orders = orders.OrderByDescending(o => o.Quantity);
+                    orders = orders.OrderByDescending(o => o.Status);
                     break;
                 case "Status":
-                    orders = orders.OrderBy(o => o.Quantity);
+                    orders = orders.OrderBy(o => o.Status);
                     break;
-                case "Id":
+                case "id_desc":
                     orders = orders.OrderByDescending(o => o.ID);
                     break;
                 default:
@@ -113,6 +128,9 @@ namespace KPMTestEMS.Controllers
             }
             #endregion
 
+            //int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            //orders.ToPagedList(pageNumber, pageSize);
             return View(await orders.AsNoTracking().ToListAsync());
         }
 
@@ -143,6 +161,21 @@ namespace KPMTestEMS.Controllers
 
             if (!ModelState.IsValid)
             {
+                
+                return RedirectToAction("Create");
+            }
+
+            if(model.SelectedBrandId == null || model.SelectedWeightId == null || model.SelectedWidthId == null)
+            {
+                string message = "";
+                if (model.SelectedBrandId == null)
+                    message = "You did not select brand";
+                if (model.SelectedWeightId == null)
+                    message = "You did not select weight";
+                if (model.SelectedWidthId == null)
+                    message = "You did not select width";
+                ViewBag.Message = message;
+
                 return RedirectToAction("Create");
             }
 
@@ -203,7 +236,7 @@ namespace KPMTestEMS.Controllers
 
         // POST: Orders/Edit
         [HttpPatch]
-        public ActionResult EditOrder()
+        public ActionResult EditOrder(int id)
         {
             return RedirectToAction("UnderConstruction", controllerName: "Home");
         }
@@ -231,6 +264,7 @@ namespace KPMTestEMS.Controllers
         }
 
 
+        // Folloing methods are currently part of parent ApplicationBaseController 
 
         // Those methods create enumerable lists for
         // OrderViewModel to be filled in order form

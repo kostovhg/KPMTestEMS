@@ -30,6 +30,11 @@
     <div class="page-header">
         <h2>Create order</h2>
     </div>
+
+    @if (ViewBag.Message != null)
+    {
+        <span class="text-success">@ViewBag.Message</span>
+    }
     <p>Choose properties and width</p>
     <!-- ProductionViewModel holds propertes for AvaiableBrands, AvaiableWeights
         and AvaiableWidths, those properties are
@@ -46,8 +51,8 @@
 
             <!-- Radiobutton group for choosing between avaiable brands -->
             <div class="form-group">
-                <label class="control-label col-md-4" for="select_brand">Select Brand:</label>
-                <div class="col-md-4">
+                <label class="control-label col-sm-4" for="select_brand">Select Brand:</label>
+                <div class="col-sm-4">
                     @foreach (var item in Model.AvaiableBrands)
                     {
                         <div>@Html.RadioButtonFor(s => s.SelectedBrandId, item.Value, new { @class = "radio-inline", name = "select_brand" })@item.Text</div>
@@ -56,29 +61,29 @@
             </div>
             <!-- Dropdown list group for choosing between avaiable weights -->
             <div class="form-group">
-                <label class="control-label col-md-4" for="select_weight">Select Width:</label>
-                <div class="col-md-4">
-                    @Html.DropDownListFor(m => m.SelectedWeightId, Model.AvaiableWeights, new { @class = "form-control col-xs-4 col-sm-4", name = "select_weight" })
+                <label class="control-label col-sm-4" for="select_weight">Select Width:</label>
+                <div class="col-sm-4">
+                    @Html.DropDownListFor(m => m.SelectedWeightId, Model.AvaiableWeights, new { @class = "form-control", name = "select_weight" })
                 </div>
             </div>
             <!-- Listbox group for choosing between avaiable widths -->
             <div class="form-group">
-                <label class="control-label col-md-4" for="select_weight">Select Weight:</label>
-                <div class="col-md-4">
-                    @Html.ListBoxFor(m => m.SelectedWidthId, Model.AvaiableWidths, new { @class = "form-control col-xs-4 col-sm-4", name = "select_weight" })
+                <label class="control-label col-sm-4" for="select_weight">Select Weight:</label>
+                <div class="col-sm-4">
+                    @Html.ListBoxFor(m => m.SelectedWidthId, Model.AvaiableWidths, new { @class = "form-control", name = "select_weight" })
                 </div>
             </div>
             <!-- Datepicker // TODO: change formats, add rules, restrictions and error reports -->
             <div class="form-group">
                 @Html.LabelFor(m => m.DueDate, new { @class = "control-label col-sm-4", @for = "datepicker" })
                 <div class="col-sm-4">
-                    @Html.TextBoxFor(m => m.DueDate, "{0:dd-MM-yyyy}", new { @class = "form-control col-xs-4 col-sm-4 datepicker", @id = "datepicker" })
+                    @Html.TextBoxFor(m => m.DueDate, "{0:MM/dd/yyyy}", new { @class = "form-control datepicker", @id = "datepicker" })
                 </div>
             </div>
             <!-- Textbox for quantity -->
             <div class="form-group">
-                @Html.LabelFor(m => m.Quantity, new { @class= "col-md-4 control-label"})
-                <div class="col-md-4">
+                @Html.LabelFor(m => m.Quantity, new { @class = "control-label col-sm-4" })
+                <div class="col-sm-4">
                     @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control" })
                 </div>
             </div>
@@ -86,14 +91,14 @@
             <div class="form-group">
                 <label for="textArea" class="control-label col-sm-4">Your comments</label>
                 <div class="col-sm-4">
-                    <textarea class="form-control col-xs-4 col-sm-4" rows="3" id="textArea"></textarea>
+                    <textarea class="form-control" rows="3" id="textArea"></textarea>
                 </div>
             </div>
             <!-- Buttons // TODO: redirect Cancel buton -->
             <div class="form-group">
                 <div class="col-sm-4 col-sm-offset-4">
                     <button type="reset" class="btn btn-default">Cancel</button>
-                    <input type="submit" value="Send" class="btn btn-primary" />
+                    <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
             </div>
         }

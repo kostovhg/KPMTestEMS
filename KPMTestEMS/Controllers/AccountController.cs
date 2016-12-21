@@ -154,6 +154,17 @@ namespace KPMTestEMS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            using (var database = new TestDbContext())
+            {
+                var sameEmail = database.Users.FirstOrDefault(u => u.Email == model.Email);
+
+                if (sameEmail != null)
+                {
+                    ViewBag.Message = "User with this email exist.";
+                    return View();
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser {
@@ -165,8 +176,14 @@ namespace KPMTestEMS.Controllers
                     RegistrationDate = DateTime.Now
                 };
 
-
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                // Add default role to new user
+
+
+
+                var addRoleResult = UserManager.AddToRole(user.Id, "Client");
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);

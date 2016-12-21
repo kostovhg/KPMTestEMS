@@ -86,6 +86,7 @@ namespace KPMTestEMS.Models
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
 
+    // This View Model class combine Orders from other class and Index view models from current default view model
     public class ClientOptionsViewModel
     {
         public OrderViewModel newOrder { get; set; }
