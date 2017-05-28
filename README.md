@@ -1,9 +1,7 @@
 # KPMTestEMS
 <p align ="center"><img src="https://github.com/kostovhg/KPMTestEMS/blob/master/KPMTestEMS/Content/Images/Logo01.png" width="100px"></p>
 <p>&nbsp;</p>
-[![Travis branch](https://img.shields.io/travis/rust-lang/rust/master.svg?style=plastic)]()
-[![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/filp/whoops.svg?style=plastic)]()
-[![Version](https://img.shields.io/badge/ver-0.0.0--pre--alfa-red.svg)]()
+
 <p>&nbsp;</p>
 ## Description:
 System should provide options for clients to order custom products by select between different parameters of main product, traders to manage client's orders and to create products parameters.
